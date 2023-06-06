@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        width: 100%;
+        height: 100vh;
+        background: blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-family: sans-serif;
+    }
+
+    .container {
+        width: 400px;
+        height: 400px;
+        background: rgb(139, 116, 116);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    input {
+        position: absolute;
+        left: 5%;
+        top: 5%;
+        height: 50px;
+        padding: 10px;
+        width: 60%;
+        background: white;
+        border: none;
+    }
+
+    button {
+        position: absolute;
+        right: 5%;
+        top: 5%;
+        height: 50px;
+        width: 100px;
+        padding: 10px;
+        background: rgb(11, 231, 40);
+        border: none;
+    }
+
+    p {
+        margin: 5px;
+        color: aliceblue;
+    }
+</style>
+
+
+<body>
+    <div class="container">
+        <input type="datetime-local" name="" id="dob">
+        <button id="submit">Calculator Age</button>
+        <br><br>
+        <p id="year">Year</p>
+        <p id="month">Month</p>
+        <p id="week">Week</p>
+        <p id="day">Day</p>
+        <p id="hour">Hour</p>
+        <p id="min">Mints</p>
+        <p id="sec">Second</p>
+    </div>
+    <script>
+        document.querySelector("#submit").addEventListener("click", function () {
+            const update = function () {
+                let dob = document.querySelector("#dob").value,
+                    day = new Date(dob),
+                    time = day.getTime(),
+                    today = new Date(),
+                    timenow = today.getTime(),
+                    value = timenow - time,
+                    sec = Math.floor(value / 1000),
+                    min = Math.floor(value / (1000 * 60)),
+                    hour = Math.floor(value / (1000 * 60 * 60)),
+                    days = Math.floor(value / (1000 * 60 * 60 * 24)),
+                    week = Math.floor(value / (1000 * 60 * 60 * 24 * 7)),
+                    month = Math.floor(value / (1000 * 60 * 60 * 24 * 30.4375)),
+                    year = Math.floor(value / (1000 * 60 * 60 * 24 * 365.25));
+
+                let insert = function (x, y) {
+                    document.querySelector(x).innerHTML = y
+                }
+                insert("#year", year + "-Years");
+                insert("#month", month + "-Months");
+                insert("#week", week + "-Weeks");
+                insert("#day", day + "-Days");
+                insert("#hour", hour + "-Hours");
+                insert("#min", min + "-Minutes");
+                insert("#sec", sec + "-Second");
+            }
+            setInterval(update, 1000);
+        })
+    </script>
+
+</body>
+
+</html>
